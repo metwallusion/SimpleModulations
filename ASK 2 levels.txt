@@ -1,0 +1,20 @@
+clc
+clear all
+%ASK Mod -1 and 1 
+
+msg=randi([0,1],1,4);  %generate random message randi
+f=5;
+fs=10*f;   %sample freq              %fs , ts
+ts=1/fs;
+t=0:ts:1-ts;
+carrier=(cos(2*pi*f*t)+1)/2;
+mod=[];
+for i=1:4         %objective > to multiply every element in message by carrier
+   sig=msg(i)*carrier;   %msg * carr
+    mod=[mod sig];    %array that contains all sig
+end
+subplot(2,1,1)
+bar(msg)
+subplot(2,1,2)
+t2=0:ts:4-ts;
+plot(t2,mod)
