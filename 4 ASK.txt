@@ -1,0 +1,25 @@
+clc
+clear all
+%4ASK Mod
+msg=randi([0,1],1,8);
+f=5;
+fs=10*f;
+ts=1/fs;
+t=0:ts:1-ts;
+carrier=(cos(2*pi*f*t)+1)/2;
+mod=[];
+for i=1:2:8
+    if msg(i)==0 && msg(i+1)==0
+        sig=0*carrier;
+        
+    elseif msg(i)==0 && msg(i+1)==1
+        sig=1*carrier;
+    elseif msg(i)==1 && msg(i+1)==0
+        sig=2*carrier;
+    elseif msg(i)==1 && msg(i+1)==1
+        sig=3*carrier;
+    end
+    mod=[mod sig];
+end
+t2=0:ts:4-ts;
+stairs(t2,mod)
